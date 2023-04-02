@@ -234,3 +234,31 @@ ggplot(data = diamantes) +
     fun = median
   )
 ```
+
+Podemos colorear los gráficos de barras utilizando la estética `fill`:
+
+```{r}
+ggplot(data = diamantes) +
+  geom_bar(mapping = aes(x = corte, fill = corte))
+```
+
+## Sistemas de coordenadas
+
+Posiblemente sea la parte más compleja de **ggplot**. En ocasiones desearemos intercambiar ejes, mejorar el aspecto de ciertos gráficos o utilizar coordenadas polares.
+
+### Intercambiar ejes
+
+Veamos un gráfico de caja como aparece por defecto:
+
+```{r}
+ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
+  geom_boxplot()
+```
+
+Aceptemos que no se ve muy bien en cuanto a los títulos de las variables en el eje *x*. Cambiemos los ejes, para ello se usa `coord_flip()`:
+
+```{r}
+ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
+  geom_boxplot() +
+  coord_flip()
+```
