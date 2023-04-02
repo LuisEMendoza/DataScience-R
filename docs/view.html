@@ -206,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="nuestro-primer-gráfico" class="level2">
 <h2 class="anchored" data-anchor-id="nuestro-primer-gráfico">Nuestro primer gráfico</h2>
-<p>Crearemos nuestro primer gráfico con <strong>ggplot</strong>. Para ello, debemos estar seguros de haber cargado correctamente tanto el Tydiverse como el conjunto <code>datos</code>. Enseguida mostraremos un <em>data frame,</em> lo cual es un conjunto rectangular de datos organizados en columnas (que vienen siendo las variables) y filas (éstas son las observaciones). Este <em>data frame</em> es llamado <code>millas</code>, el cual está contenido en <code>datos</code> (<code>datos::millas</code>).</p>
+<p>Crearemos nuestro primer gráfico con <strong>ggplot</strong> y probaremos con datos reales que a mayor tamaño de motor de un coche, mayor consumo de gasolina tendrá. Para ello, debemos estar seguros de haber cargado correctamente tanto el Tydiverse como el conjunto <code>datos</code>. Enseguida mostraremos un <em>data frame,</em> lo cual es un conjunto rectangular de datos organizados en columnas (que vienen siendo las variables) y filas (éstas son las observaciones). Este <em>data frame</em> es llamado <code>millas</code>, el cual está contenido en <code>datos</code> (<code>datos::millas</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>millas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -228,8 +228,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #   ⁶​autopista, ⁷​combustible</code></pre>
 </div>
 </div>
+<p>Podemos observar que nos muestra sólo las primeras 10 filas e incluso menciona lo faltante: 224 filas y una columna adicionales. Es solo la visualización, el conjunto se encuentra completo en la memoria de R, por comodidad y practicidad es mejor mostrarlos así. También es posible notar que los nombres de las variables no aparecen completos, pero se especifican en la parte inferior del resultado arrojado.</p>
+<p>De todas las columnas / variables mostradas, nos interesan la <code>cilindrada</code> (lo cual se refiere al tamaño del motor en litros) y <code>autopista</code>, que muestra la eficiencia del coche en millas recorridas por galón de combustible.</p>
+<section id="gráfico-de-dispersión-con-ggplot" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-dispersión-con-ggplot">Gráfico de dispersión con ggplot</h3>
+<p>Para poder mostrar un gráfico con las variables mencionadas anteriormente, debemos introducir el siguiente código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

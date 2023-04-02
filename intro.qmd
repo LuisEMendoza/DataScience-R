@@ -65,4 +65,10 @@ Localiza el botón de copiar y presiónalo. Ahora pégalo en tu consola de RStud
 1 + 2
 ```
 
-Cabe mencionar que retomamos algunas convenciones del libro ya citado arriba. Entre ellas, se encuentran: a) los nombres de funciones estarán escritos en fuente para código y con un par de paréntesis vacíos enseguida `sum()`; b) nombres de datos, de argumentos o de variables irán con la misma fuente, pero sin paréntesis `datos`, y por último c) si un objeto viene de un paquete y debemos especificar ambos, vendrá el nombre del paquete, enseguida doble dos puntos y al final el nombre del objeto, por ejemplo `dplyr::mutate`.
+Cabe mencionar que retomamos algunas convenciones del libro ya citado arriba. Entre ellas, se encuentran:
+
+1.  Los nombres de funciones estarán escritos en fuente para código y con un par de paréntesis vacíos enseguida `sum()`;
+
+2.  Los nombres de datos, de argumentos o de variables irán con la misma fuente, pero sin paréntesis `datos`, y por último
+
+3.  Si un objeto viene de un paquete y debemos especificar ambos, vendrá el nombre del paquete, enseguida doble dos puntos y al final el nombre del objeto, por ejemplo `dplyr::mutate`.

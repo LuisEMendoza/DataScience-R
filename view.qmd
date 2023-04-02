@@ -17,8 +17,21 @@ library(datos)
 
 ## Nuestro primer gráfico
 
-Crearemos nuestro primer gráfico con **ggplot**. Para ello, debemos estar seguros de haber cargado correctamente tanto el Tydiverse como el conjunto `datos`. Enseguida mostraremos un *data frame,* lo cual es un conjunto rectangular de datos organizados en columnas (que vienen siendo las variables) y filas (éstas son las observaciones). Este *data frame* es llamado `millas`, el cual está contenido en `datos` (`datos::millas`).
+Crearemos nuestro primer gráfico con **ggplot** y probaremos con datos reales que a mayor tamaño de motor de un coche, mayor consumo de gasolina tendrá. Para ello, debemos estar seguros de haber cargado correctamente tanto el Tydiverse como el conjunto `datos`. Enseguida mostraremos un *data frame,* lo cual es un conjunto rectangular de datos organizados en columnas (que vienen siendo las variables) y filas (éstas son las observaciones). Este *data frame* es llamado `millas`, el cual está contenido en `datos` (`datos::millas`).
 
 ```{r}
 millas
+```
+
+Podemos observar que nos muestra sólo las primeras 10 filas e incluso menciona lo faltante: 224 filas y una columna adicionales. Es solo la visualización, el conjunto se encuentra completo en la memoria de R, por comodidad y practicidad es mejor mostrarlos así. También es posible notar que los nombres de las variables no aparecen completos, pero se especifican en la parte inferior del resultado arrojado.
+
+De todas las columnas / variables mostradas, nos interesan la `cilindrada` (lo cual se refiere al tamaño del motor en litros) y `autopista`, que muestra la eficiencia del coche en millas recorridas por galón de combustible.
+
+### Gráfico de dispersión con ggplot
+
+Para poder mostrar un gráfico con las variables mencionadas anteriormente, debemos introducir el siguiente código:
+
+```{r}
+ggplot(data = millas) +
+  geom_point(mapping = aes(x = cilindrada, y = autopista))
 ```
