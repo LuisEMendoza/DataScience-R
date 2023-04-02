@@ -50,3 +50,12 @@ Entremos un poco más en estos tres conceptos: datos, estéticas y geoms. Agregu
 ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = disp)) +
   geom_point()
 ```
+
+Enseguida haremos que el tamaño de las formas depende precisamente de la variable ya usada, `disp`.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, size = disp)) +
+  geom_point()
+```
+
+Sin embargo, hay que tener cuidado con el hecho de que una variable continua no debe ser mapeada con `shape`. Por ende, `shape` no existe en una escala continua.
