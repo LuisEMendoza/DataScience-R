@@ -34,13 +34,13 @@ library(tidyverse)
 
 Debe aparecer un mensaje que mencione varios nombres, como `ggplot2`, `purr` o `tibble`. Eso significa que se ha cargado correctamente.
 
-Es importante que no descuidemos la actualidad de estos paquetes. Podemos actualizarlos mediante
+Es importante que no descuidemos la actualidad de estos paquetes. Podemos actualizarlos después de haber cargado el paquete mediante
 
 ``` r
 tidyverse_update()
 ```
 
-Lo cual buscará versiones más recientes y, de haberlas, las instalará en lugar de las anteriores.
+Lo cual buscará versiones más recientes y, de haberlas, nos dará unas líneas de código que nos permitirá obtenerlas.
 
 ### Paquete `datos`
 
@@ -64,3 +64,5 @@ Localiza el botón de copiar y presiónalo. Ahora pégalo en tu consola de RStud
 #| echo: false
 1 + 2
 ```
+
+Cabe mencionar que retomamos algunas convenciones del libro ya citado arriba. Entre ellas, se encuentran: a) los nombres de funciones estarán escritos en fuente para código y con un par de paréntesis vacíos enseguida `sum()`; b) nombres de datos, de argumentos o de variables irán con la misma fuente, pero sin paréntesis `datos`, y por último c) si un objeto viene de un paquete y debemos especificar ambos, vendrá el nombre del paquete, enseguida doble dos puntos y al final el nombre del objeto, por ejemplo `dplyr::mutate`.

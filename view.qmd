@@ -1,0 +1,24 @@
+---
+title: "Visualización de datos"
+format: html
+editor: visual
+---
+
+## Introducción {#quarto}
+
+Aunque parezca lo más práctico comenzar con la organización y transformación de los datos, comenzaremos por el otro lado. Veamos primero cómo crear gráficos coherentes y hasta elegantes.
+
+Utilizaremos el paquete **ggplot**, que utiliza un sistema conocido como la *gramática de gráficos*. Carguemos dicho paquete, además del conjunto de datos a utilizar:
+
+```{r}
+library(tidyverse)
+library(datos)
+```
+
+## Nuestro primer gráfico
+
+Crearemos nuestro primer gráfico con **ggplot**. Para ello, debemos estar seguros de haber cargado correctamente tanto el Tydiverse como el conjunto `datos`. Enseguida mostraremos un *data frame,* lo cual es un conjunto rectangular de datos organizados en columnas (que vienen siendo las variables) y filas (éstas son las observaciones). Este *data frame* es llamado `millas`, el cual está contenido en `datos` (`datos::millas`).
+
+```{r}
+millas
+```
