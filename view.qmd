@@ -42,6 +42,9 @@ Expliquemos las líneas que ejecutamos para obtener el gráfico. En primer lugar
 
 El argumento de `geom_point()` es `mapping`, el cual define cómo se asignan las variables a la parte visual. Podemos notar que aparece emparejado con la función `aes()`, la cual determina cuál variable se corresponde con el eje *x* y cuál al eje *y* del plano o gráfico. **ggplot** buscará las variables dentro del conjunto de datos.
 
-```{julia}
-1+1
+Practiquemos un poco más. Ahora crearemos un gráfico de dispersión `autopista` contra `cilindros`.
+
+```{r}
+ggplot(data = millas) +
+  geom_point(mapping = aes(x = autopista, y = cilindros))
 ```

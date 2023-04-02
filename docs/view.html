@@ -243,10 +243,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Este gráfico muestra una relación negativa entre el tamaño del motor y la eficiencia del combustible. O lo que es lo mismo, a mayor tamaño de motor, menos eficiente el combustible.</p>
 <p>Expliquemos las líneas que ejecutamos para obtener el gráfico. En primer lugar, usamos la función <code>ggplot</code>. El primer argumento de esta función es el conjunto de datos a graficar. Sin embargo, no resulta atractivo el resultado si lo dejamos solo con ese argumento (mostrará un gráfico vacío). Notemos que en segundo lugar, tenemos un signo “+”. Éste nos indica que estamos agregando una capa a <code>ggplot()</code>, la cual es definida por la función <code>geom_point</code>, que no es otra cosa más que una capa de puntos. Esta capa se corresponde con un diagrama de dispersión.</p>
 <p>El argumento de <code>geom_point()</code> es <code>mapping</code>, el cual define cómo se asignan las variables a la parte visual. Podemos notar que aparece emparejado con la función <code>aes()</code>, la cual determina cuál variable se corresponde con el eje <em>x</em> y cuál al eje <em>y</em> del plano o gráfico. <strong>ggplot</strong> buscará las variables dentro del conjunto de datos.</p>
+<p>Practiquemos un poco más. Ahora crearemos un gráfico de dispersión <code>autopista</code> contra <code>cilindros</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span><span class="op">+</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> autopista, <span class="at">y =</span> cilindros))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
