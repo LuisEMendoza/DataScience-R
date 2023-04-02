@@ -1,5 +1,5 @@
 ---
-title: "Visualización de datos"
+title: "Visualización de datos - R4DS"
 format: html
 editor: visual
 ---
@@ -242,11 +242,11 @@ ggplot(data = diamantes) +
   geom_bar(mapping = aes(x = corte, fill = corte))
 ```
 
-## Sistemas de coordenadas
+## Sistemas de coordenadas {#sistemas-de-coordenadas}
 
 Posiblemente sea la parte más compleja de **ggplot**. En ocasiones desearemos intercambiar ejes, mejorar el aspecto de ciertos gráficos o utilizar coordenadas polares.
 
-### Intercambiar ejes
+### Intercambiar ejes {#intercambiar-ejes}
 
 Veamos un gráfico de caja como aparece por defecto:
 
@@ -263,7 +263,7 @@ ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
   coord_flip()
 ```
 
-### Ajuste de mapas
+### Ajuste de mapas {#ajuste-de-mapas}
 
 Por si en algún momento debemos graficar mapas, es posible que no salgan bien representados.
 
@@ -283,7 +283,7 @@ ggplot(nz, aes(long, lat, group = group)) +
   coord_quickmap()
 ```
 
-### Coordenadas polares
+### Coordenadas polares {#coordenadas-polares}
 
 Podemos intercambiar las coordenadas cartesianas a polares, usando el siguiente código que muestra la relación entre dos tipos de gráfico:
 

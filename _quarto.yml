@@ -12,6 +12,8 @@ website:
       - text: "Introducción"
         file: intro.qmd
       - text: "Visualización"
-        file: view.qmd
+        menu: 
+          - DC_view.qmd
+          - R4DS_view.qmd
       - text: "About"
         file: about.qmd

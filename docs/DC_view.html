@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introducción</title>
+<title>Visualización de datos - DC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,13 +141,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./intro.html" aria-current="page">
+    <a class="nav-link" href="./intro.html">
  <span class="menu-text">Introducción</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./view.qmd">
- <span class="menu-text">Visualización</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-visualización" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Visualización</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-visualización">    
+        <li>
+    <a class="dropdown-item" href="./DC_view.html">
+ <span class="dropdown-text">Visualización de datos - DC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./R4DS_view.html">
+ <span class="dropdown-text">Visualización de datos - R4DS</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./about.qmd">
  <span class="menu-text">About</span></a>
@@ -168,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introducción</h1>
+<h1 class="title">Visualización de datos - DC</h1>
 </div>
 
 
@@ -183,54 +194,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Veamos cuáles son los recursos que debemos descargar e instalar primero.</p>
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Prerrequisitos</h2>
-<section id="r" class="level3">
-<h3 class="anchored" data-anchor-id="r">R</h3>
-<p>Comencemos instalando R. Esto se hace desde el enlace <a href="https://cloud.r-project.org/">CRAN</a> y eligiendo la plataforma a usar, ya sea Windows, Mac o Linux. En estos apuntes usamos Linux.</p>
-</section>
-<section id="rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
-<p>R es poderoso, pero por defecto funciona con la consola o terminal. Esto puede echarnos para atrás la primera vez. Sin duda, uno se acostumbra y la domina, pero por comodidad podemos comenzar utilizando un buen IDE, en este caso RStudio. Podemos descargarlo e instalarlo desde <a href="https://posit.co/download/rstudio-desktop/">aquí</a>.</p>
-</section>
-<section id="tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="tidyverse">Tidyverse</h3>
-<p>Por sí mismos, R y RStudio son bastante útiles. Sin embargo, es necesario ampliar sus funcionalidades mediante paquetes, que vienen siendo una especie de añadidos que contienen funciones nuevas. En nuestro caso, será el paquete <em>Tidyverse</em> el que instalaremos. Esto es posible lograrlo de dos maneras, siendo la más sencilla la de copiar y pegar la siguiente línea de código en la consola de RStudio:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Después de pegar dicha línea en la consola, presionamos Enter para ejecutarla. Así, R descargará e instalará el paquete (es obvio que debemos tener acceso a internet). Es normal que se tome su tiempo.</p>
-<p>Justo después de la instalación, no es posible usar los paquetes por defecto. Debemos cargarlos usando <code>library()</code>, con el nombre del paquete dentro de los paréntesis. Por ejemplo:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Debe aparecer un mensaje que mencione varios nombres, como <code>ggplot2</code>, <code>purr</code> o <code>tibble</code>. Eso significa que se ha cargado correctamente.</p>
-<p>Es importante que no descuidemos la actualidad de estos paquetes. Podemos actualizarlos después de haber cargado el paquete mediante</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_update</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Lo cual buscará versiones más recientes y, de haberlas, nos dará unas líneas de código que nos permitirá obtenerlas.</p>
-</section>
-<section id="paquete-datos" class="level3">
-<h3 class="anchored" data-anchor-id="paquete-datos">Paquete <code>datos</code></h3>
-<p>En estos apuntes se utilizan datos recuperados de varios cursos. Uno muy importante es precisamente el libro <em>Ciencia de Datos con R</em>, cuyo conjunto de datos se llama, precisamente <code>datos</code>. Desde R es posible instalarlos con</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"datos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="ejecutando-código" class="level2">
-<h2 class="anchored" data-anchor-id="ejecutando-código">Ejecutando código</h2>
-<p>Se recomienda que el código que vayamos mostrando se vaya introduciendo y ejecutando en la consola de RStudio. La ventaja de que estos apuntes sean electrónicos es que podemos mostrar el código tal cual pueda ser copiado y pegado en dicha consola. De hecho, hay hasta un botón que permite copiarlo. Identificaremos el código «copiable» porque estará escrito como a continuación:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Localiza el botón de copiar y presiónalo. Ahora pégalo en tu consola de RStudio. Debes comprobar que te arroja lo siguiente, exactamente como te lo mostramos:</p>
+<p>Para tener un primer acercamiento sobre la visualización de datos con R, demos un acercamiento a <strong>ggplot</strong>. Carguemos el paquete con</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>y procedamos a explorar un conjunto de datos ya presente en R: <code>mtcars</code>. Este conjunto de datos es pequeño y muy ilustrativo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>'data.frame':   32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
 </div>
 </div>
-<p>Cabe mencionar que retomamos algunas convenciones del libro ya citado arriba. Entre ellas, se encuentran:</p>
-<ol type="1">
-<li><p>Los nombres de funciones estarán escritos en fuente para código y con un par de paréntesis vacíos enseguida <code>sum()</code>;</p></li>
-<li><p>Los nombres de datos, de argumentos o de variables irán con la misma fuente, pero sin paréntesis <code>datos</code>, y por último</p></li>
-<li><p>Si un objeto viene de un paquete y debemos especificar ambos, vendrá el nombre del paquete, enseguida doble dos puntos y al final el nombre del objeto, por ejemplo <code>dplyr::mutate</code>.</p></li>
-</ol>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

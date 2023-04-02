@@ -1,0 +1,17 @@
+---
+title: "Visualización de datos - DC"
+format: html
+editor: visual
+---
+
+Para tener un primer acercamiento sobre la visualización de datos con R, demos un acercamiento a **ggplot**. Carguemos el paquete con
+
+```{r}
+library(ggplot2)
+```
+
+y procedamos a explorar un conjunto de datos ya presente en R: `mtcars`. Este conjunto de datos es pequeño y muy ilustrativo.
+
+```{r}
+str(mtcars)
+```
