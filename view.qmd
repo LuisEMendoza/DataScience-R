@@ -15,7 +15,7 @@ library(tidyverse)
 library(datos)
 ```
 
-## Nuestro primer gráfico
+## Nuestro primer gráfico {#nuestro-primer-gráfico}
 
 Crearemos nuestro primer gráfico con **ggplot** y probaremos con datos reales que a mayor tamaño de motor de un coche, mayor consumo de gasolina tendrá. Para ello, debemos estar seguros de haber cargado correctamente tanto el Tydiverse como el conjunto `datos`. Enseguida mostraremos un *data frame,* lo cual es un conjunto rectangular de datos organizados en columnas (que vienen siendo las variables) y filas (éstas son las observaciones). Este *data frame* es llamado `millas`, el cual está contenido en `datos` (`datos::millas`).
 
@@ -27,7 +27,7 @@ Podemos observar que nos muestra sólo las primeras 10 filas e incluso menciona 
 
 De todas las columnas / variables mostradas, nos interesan la `cilindrada` (lo cual se refiere al tamaño del motor en litros) y `autopista`, que muestra la eficiencia del coche en millas recorridas por galón de combustible.
 
-### Gráfico de dispersión con ggplot
+### Gráfico de dispersión con ggplot {#gráfico-de-dispersión-con-ggplot}
 
 Para poder mostrar un gráfico con las variables mencionadas anteriormente, debemos introducir el siguiente código:
 
