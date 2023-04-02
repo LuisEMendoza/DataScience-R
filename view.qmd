@@ -179,3 +179,12 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
 ```
 
 `filter()` filtra los datos que le indicamos, especificando primero el conjunto de datos original y enseguida el criterio de filtrado.
+
+### Gráfico de barras
+
+Veamos ahora el gráfico de barras. Para ello, usaremos el conjunto de datos diamantes. Agruparemos por la variable corte.
+
+```{r}
+ggplot(data = diamantes) +
+  stat_count(mapping = aes(x = corte))
+```
