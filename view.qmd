@@ -255,10 +255,48 @@ ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
   geom_boxplot()
 ```
 
-Aceptemos que no se ve muy bien en cuanto a los títulos de las variables en el eje *x*. Cambiemos los ejes, para ello se usa `coord_flip()`:
+Cambiemos los ejes, para ello se usa `coord_flip()`:
 
 ```{r}
 ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
   geom_boxplot() +
   coord_flip()
+```
+
+### Ajuste de mapas
+
+Por si en algún momento debemos graficar mapas, es posible que no salgan bien representados.
+
+```{r}
+library(maps)
+nz <- map_data("nz")
+
+ggplot(nz, aes(long, lat, group = group)) +
+  geom_polygon(fill = "white", colour = "black")
+```
+
+Podemos arreglar sus proporciones de la siguiente manera:
+
+```{r}
+ggplot(nz, aes(long, lat, group = group)) +
+  geom_polygon(fill = "white", colour = "black") +
+  coord_quickmap()
+```
+
+### Coordenadas polares
+
+Podemos intercambiar las coordenadas cartesianas a polares, usando el siguiente código que muestra la relación entre dos tipos de gráfico:
+
+```{r}
+bar <- ggplot(data = diamantes) +
+  geom_bar(
+    mapping = aes(x = corte, fill = corte),
+    show.legend = FALSE,
+    width = 1
+  ) +
+  theme(aspect.ratio = 1) +
+  labs(x = NULL, y = NULL)
+
+bar + coord_flip()
+bar + coord_polar()
 ```
