@@ -91,3 +91,25 @@ Si en dado caso deseamos utilizar el color para fines meramente estéticos, es d
 ggplot(data = millas) +
   geom_point(mapping = aes(x = cilindrada, y = autopista), color = "red")
 ```
+
+R permite cambiar los puntos en cuanto a color (escribiendo entrecomillado el nombre del color en inglés), tamaño (especificando en mm) y la forma (utilizando uno de los 25 números disponibles, por ejemplo el 0 es un cuadrado, el 1 un círculo y el 2 un triángulo).
+
+### Facetas
+
+Podemos separar los gráficos de acuerdo a variables categóricas. Por ejemplo, es posible que deseemos elaborar un gráfico por cada clase de vehículo. Esto implica una separación con base en una sola variable. Lo realizamos de la siguiente manera:
+
+```{r}
+ggplot(data = millas) +
+  geom_point(mapping = aes(x = cilindrada, y = autopista)) +
+  facet_wrap(~clase, nrow = 2)
+```
+
+Notemos que agregamos una capa más a **ggplot** con el signo '+', en dicha capa escribimos `facet_wrap()` y dentro suyo una fórmula con variables categóricas. En nuestro caso, la variable `clase`. El argumento `nrow` se refiere al número de renglones o filas que queremos tener en la representación de los diferentes gráficos.
+
+Si por otro lado, deseamos separar los datos con base en dos variables, utilizaremos `facet_grid()`, la cual admite una fórmula con los nombres de las variables separadas por la virgulilla `~`. Veamos cómo hacerlo con las variables `traccion` y `cilindros`.
+
+```{r}
+ggplot(data = millas) +
+  geom_point(mapping = aes(x = cilindrada, y = autopista)) +
+  facet_grid(traccion ~ cilindros)
+```

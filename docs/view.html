@@ -312,8 +312,31 @@ specifying shapes manually if you must have them.</code></pre>
 <p><img src="view_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>R permite cambiar los puntos en cuanto a color (escribiendo entrecomillado el nombre del color en inglés), tamaño (especificando en mm) y la forma (utilizando uno de los 25 números disponibles, por ejemplo el 0 es un cuadrado, el 1 un círculo y el 2 un triángulo).</p>
+<section id="facetas" class="level3">
+<h3 class="anchored" data-anchor-id="facetas">Facetas</h3>
+<p>Podemos separar los gráficos de acuerdo a variables categóricas. Por ejemplo, es posible que deseemos elaborar un gráfico por cada clase de vehículo. Esto implica una separación con base en una sola variable. Lo realizamos de la siguiente manera:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clase, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notemos que agregamos una capa más a <strong>ggplot</strong> con el signo ‘+’, en dicha capa escribimos <code>facet_wrap()</code> y dentro suyo una fórmula con variables categóricas. En nuestro caso, la variable <code>clase</code>. El argumento <code>nrow</code> se refiere al número de renglones o filas que queremos tener en la representación de los diferentes gráficos.</p>
+<p>Si por otro lado, deseamos separar los datos con base en dos variables, utilizaremos <code>facet_grid()</code>, la cual admite una fórmula con los nombres de las variables separadas por la virgulilla <code>~</code>. Veamos cómo hacerlo con las variables <code>traccion</code> y <code>cilindros</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(traccion <span class="sc">~</span> cilindros)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
