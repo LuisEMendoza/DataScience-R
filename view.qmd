@@ -152,7 +152,7 @@ ggplot(data = millas) +
 
 Cabe mencionar que esta simpleza ocasiona el doble trabajo de capturar mapeos a cada geom. Podemos introducir el concepto de mapeos globales y locales en **ggplot**.
 
-Veamos el uso del mapeo global:
+Si escribimos el mapeo dentro de `ggplot()` podemos asignar esos valores por defecto a todos los geoms que apilemos, haciendo necesario un solo cambio si deseamos editar la estética de dichos geoms. Veamos el uso del mapeo global:
 
 ```{r}
 ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista, color = traccion)) +
@@ -160,10 +160,22 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista, color = tracc
   geom_smooth()
 ```
 
-Ahora abordemos el uso de los mapeos locales. Estos permiten ampliar o sobrescribir los mapeos globales solo en la capa donde se escriben. Así es posible mostrar diferentes estéticas en cada geom.
+Ahora abordemos el uso de los mapeos locales. Estos permiten ampliar o sobrescribir los mapeos globales solo en la capa donde se colocan. Así es posible mostrar diferentes estéticas en cada geom.
 
 ```{r}
 ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
   geom_point(mapping = aes(color = clase)) +
   geom_smooth()
 ```
+
+En este ejemplo seguiremos teniendo los mismos ejes *x* y *y* en ambos geoms, pero solo aplicamos el cambio del color en `geom_point()`.
+
+Veamos ahora otro ejemplo, pero cambiando el conjunto de datos a mostrar en uno de los geoms. En este caso, grafiquemos solo los coches subcompactos en la línea suavizada utilizando la función `filter()`.
+
+```{r}
+ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
+  geom_point(mapping = aes(color = clase)) +
+  geom_smooth(data = filter(millas, clase == "subcompacto"), se = FALSE)
+```
+
+`filter()` filtra los datos que le permitimos pasar, especificando primero el conjunto de datos original y enseguida el criterio de filtrado.

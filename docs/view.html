@@ -382,7 +382,7 @@ specifying shapes manually if you must have them.</code></pre>
 </div>
 </div>
 <p>Cabe mencionar que esta simpleza ocasiona el doble trabajo de capturar mapeos a cada geom. Podemos introducir el concepto de mapeos globales y locales en <strong>ggplot</strong>.</p>
-<p>Veamos el uso del mapeo global:</p>
+<p>Si escribimos el mapeo dentro de <code>ggplot()</code> podemos asignar esos valores por defecto a todos los geoms que apilemos, haciendo necesario un solo cambio si deseamos editar la estética de dichos geoms. Veamos el uso del mapeo global:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista, <span class="at">color =</span> traccion)) <span class="sc">+</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -394,7 +394,7 @@ specifying shapes manually if you must have them.</code></pre>
 <p><img src="view_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Ahora abordemos el uso de los mapeos locales. Estos permiten ampliar o sobrescribir los mapeos globales solo en la capa donde se escriben. Así es posible mostrar diferentes estéticas en cada geom.</p>
+<p>Ahora abordemos el uso de los mapeos locales. Estos permiten ampliar o sobrescribir los mapeos globales solo en la capa donde se colocan. Así es posible mostrar diferentes estéticas en cada geom.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista)) <span class="sc">+</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> clase)) <span class="sc">+</span></span>
@@ -406,6 +406,20 @@ specifying shapes manually if you must have them.</code></pre>
 <p><img src="view_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>En este ejemplo seguiremos teniendo los mismos ejes <em>x</em> y <em>y</em> en ambos geoms, pero solo aplicamos el cambio del color en <code>geom_point()</code>.</p>
+<p>Veamos ahora otro ejemplo, pero cambiando el conjunto de datos a mostrar en uno de los geoms. En este caso, grafiquemos solo los coches subcompactos en la línea suavizada utilizando la función <code>filter()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> clase)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">filter</span>(millas, clase <span class="sc">==</span> <span class="st">"subcompacto"</span>), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><code>filter()</code> filtra los datos que le permitimos pasar, especificando primero el conjunto de datos original y enseguida el criterio de filtrado.</p>
 
 
 </section>
