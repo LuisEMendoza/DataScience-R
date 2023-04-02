@@ -49,7 +49,7 @@ ggplot(data = millas) +
   geom_point(mapping = aes(x = autopista, y = cilindros))
 ```
 
-## Mapeos estéticos
+## Mapeos estéticos {#mapeos-estéticos}
 
 Comencemos a darle mayor personalización a nuestros gráficos. Es probable que deseemos cambiar el color de los puntos de nuestro gráfico de dispersión, basados en algún parámetro. **ggplot** nos permite cambiar la forma, el color y el tamaño de los puntos, basados en algo llamado *parámetro estético*. Para diferenciar del uso de la palabra *valor* en los datos, describiremos los cambios como *niveles* para los estéticos.
 
@@ -94,7 +94,7 @@ ggplot(data = millas) +
 
 R permite cambiar los puntos en cuanto a color (escribiendo entrecomillado el nombre del color en inglés), tamaño (especificando en mm) y la forma (utilizando uno de los 25 números disponibles, por ejemplo el 0 es un cuadrado, el 1 un círculo y el 2 un triángulo).
 
-### Facetas
+### Facetas {#facetas}
 
 Podemos separar los gráficos de acuerdo a variables categóricas. Por ejemplo, es posible que deseemos elaborar un gráfico por cada clase de vehículo. Esto implica una separación con base en una sola variable. Lo realizamos de la siguiente manera:
 
@@ -114,11 +114,13 @@ ggplot(data = millas) +
   facet_grid(traccion ~ cilindros)
 ```
 
-## Objetos geométricos
+## Objetos geométricos {#objetos-geométricos}
 
-En **ggplot** se conoce a los tipos de gráficos como **geom**. Tenemos geom de barra (*bar*), de línea (*line*), de línea suavizada (*smooth*), de caja (*boxplot*), o de dispersión (*point*). Cada geom tendrá sus propias opciones de personalización. Veamos algunas de ellas.
+En **ggplot** se conoce a los tipos de gráficos como **geom**. Tenemos geom de barra (*bar*), de línea (*line*), de línea suavizada (*smooth*), de caja (*boxplot*), o de dispersión (*point*). Cada geom tendrá sus propias opciones de personalización. **ggplot** cuenta con más de 40 geoms, para referencia sobre ellos podemos acceder a la hoja de referencias disponible en este [pdf](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf).
 
-### Línea suavizada
+Veamos algunas de los geoms disponibles.
+
+### Línea suavizada {#línea-suavizada}
 
 Utilicemos la gráfica de línea suavizada o `geom_smooth()` con exactamente los mismos datos que hemos venido utilizando con `geom_point()`.
 
@@ -133,7 +135,17 @@ Cambiemos la apariencia de las líneas suavizadas con base en el tipo de transmi
 
 ```{r}
 ggplot(data = millas) +
-  geom_smooth(mapping = aes(x = cilondrada, y = autopista, linetype = traccion))
+  geom_smooth(mapping = aes(x = cilindrada, y = autopista, linetype = traccion))
 ```
 
 Notemos que se realiza la separación en tres tipos: `4` para tracción a 4 ruedas, `d` para tracción delantera y `t` para trasera.
+
+### Uso de varios geoms en el mismo gráfico
+
+Basta con «apilar» las capas en **ggplot** en una línea por separado.
+
+```{r}
+ggplot(data = millas) +
+  geom_point(mapping = aes(x = cilindrada, y = autopista, color = traccion)) +
+  geom_smooth(mapping = aes(x = cilindrada, y = autopista, color = traccion))
+```

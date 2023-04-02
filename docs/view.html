@@ -338,7 +338,8 @@ specifying shapes manually if you must have them.</code></pre>
 </section>
 <section id="objetos-geométricos" class="level2">
 <h2 class="anchored" data-anchor-id="objetos-geométricos">Objetos geométricos</h2>
-<p>En <strong>ggplot</strong> se conoce a los tipos de gráficos como <strong>geom</strong>. Tenemos geom de barra (<em>bar</em>), de línea (<em>line</em>), de línea suavizada (<em>smooth</em>), de caja (<em>boxplot</em>), o de dispersión (<em>point</em>). Cada geom tendrá sus propias opciones de personalización. Veamos algunas de ellas.</p>
+<p>En <strong>ggplot</strong> se conoce a los tipos de gráficos como <strong>geom</strong>. Tenemos geom de barra (<em>bar</em>), de línea (<em>line</em>), de línea suavizada (<em>smooth</em>), de caja (<em>boxplot</em>), o de dispersión (<em>point</em>). Cada geom tendrá sus propias opciones de personalización. <strong>ggplot</strong> cuenta con más de 40 geoms, para referencia sobre ellos podemos acceder a la hoja de referencias disponible en este <a href="https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf">pdf</a>.</p>
+<p>Veamos algunas de los geoms disponibles.</p>
 <section id="línea-suavizada" class="level3">
 <h3 class="anchored" data-anchor-id="línea-suavizada">Línea suavizada</h3>
 <p>Utilicemos la gráfica de línea suavizada o <code>geom_smooth()</code> con exactamente los mismos datos que hemos venido utilizando con <code>geom_point()</code>.</p>
@@ -365,6 +366,21 @@ specifying shapes manually if you must have them.</code></pre>
 </div>
 </div>
 <p>Notemos que se realiza la separación en tres tipos: <code>4</code> para tracción a 4 ruedas, <code>d</code> para tracción delantera y <code>t</code> para trasera.</p>
+</section>
+<section id="uso-de-varios-geoms-en-el-mismo-gráfico" class="level3">
+<h3 class="anchored" data-anchor-id="uso-de-varios-geoms-en-el-mismo-gráfico">Uso de varios geoms en el mismo gráfico</h3>
+<p>Basta con «apilar» las capas en <strong>ggplot</strong> en una línea por separado.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista, <span class="at">color =</span> traccion)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista, <span class="at">color =</span> traccion))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>
