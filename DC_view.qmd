@@ -4,6 +4,10 @@ format: html
 editor: visual
 ---
 
+## Introducción
+
+### Primer gráfico con `ggplot`
+
 Para tener un primer acercamiento sobre la visualización de datos con R, demos un acercamiento a **ggplot**. Carguemos el paquete con
 
 ```{r}
@@ -20,5 +24,29 @@ Ahora que conocemos un poco de la estructura de `mtcars`, obtengamos de él un g
 
 ```{r}
 ggplot(data = mtcars, mapping = aes(x = cyl, y = mpg)) + 
+  geom_point()
+```
+
+El gráfico resultante no es del todo adecuado, ya que muestra espacios vacíos en el eje *x*, pero como acercamiento es correcto. Si queremos mejorarlo, debemos convertir la variable `cyl` en una variable categórica, ya que es tratada como numérica por **ggplot**. Esto lo conseguimos con el siguiente comando:
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = factor(cyl), y = mpg)) +
+  geom_point()
+```
+
+Podemos notar que ahora ya solo se muestran valores existentes en el conjunto de datos.
+
+### Gramática de gráficos
+
+Observemos detenidamente la estructura del comando anterior. **ggplot** sigue algo conocido como la *gramática de gráficos*. Ésta consiste de tres elementos básicos: los datos o variables de interés, las escalas en las que mapearemos dichos datos (las *estéticas*) y los elementos visuales usados para nuestros datos (las *geometrías*).
+
+Entre las *Estéticas* podemos encontrar los ejes *x* y *y*, el color de contorno o relleno de las formas, el tamaño, las etiquetas, transparencias, el tipo de forma, la anchura o el tipo de línea dibujada.
+
+Para el caso de las *Geometrías* (que en delante llamaremos *geom*) se pueden contar los tipos de gráfico: línea (line), puntos (points), histograma (histogram), caja (boxplot) o barras (bar).
+
+Entremos un poco más en estos tres conceptos: datos, estéticas y geoms. Agreguemos color a nuestro gráfico, utilizando una de las variables de los datos. El argumento `color` debe colocarse dentro de `aes()`.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = disp)) +
   geom_point()
 ```

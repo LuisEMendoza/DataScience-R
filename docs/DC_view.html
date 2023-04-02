@@ -194,6 +194,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<section id="primer-gráfico-con-ggplot" class="level3">
+<h3 class="anchored" data-anchor-id="primer-gráfico-con-ggplot">Primer gráfico con <code>ggplot</code></h3>
 <p>Para tener un primer acercamiento sobre la visualización de datos con R, demos un acercamiento a <strong>ggplot</strong>. Carguemos el paquete con</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -224,8 +228,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="DC_view_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>El gráfico resultante no es del todo adecuado, ya que muestra espacios vacíos en el eje <em>x</em>, pero como acercamiento es correcto. Si queremos mejorarlo, debemos convertir la variable <code>cyl</code> en una variable categórica, ya que es tratada como numérica por <strong>ggplot</strong>. Esto lo conseguimos con el siguiente comando:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Podemos notar que ahora ya solo se muestran valores existentes en el conjunto de datos.</p>
+</section>
+<section id="gramática-de-gráficos" class="level3">
+<h3 class="anchored" data-anchor-id="gramática-de-gráficos">Gramática de gráficos</h3>
+<p>Observemos detenidamente la estructura del comando anterior. <strong>ggplot</strong> sigue algo conocido como la <em>gramática de gráficos</em>. Ésta consiste de tres elementos básicos: los datos o variables de interés, las escalas en las que mapearemos dichos datos (las <em>estéticas</em>) y los elementos visuales usados para nuestros datos (las <em>geometrías</em>).</p>
+<p>Entre las <em>Estéticas</em> podemos encontrar los ejes <em>x</em> y <em>y</em>, el color de contorno o relleno de las formas, el tamaño, las etiquetas, transparencias, el tipo de forma, la anchura o el tipo de línea dibujada.</p>
+<p>Para el caso de las <em>Geometrías</em> (que en delante llamaremos <em>geom</em>) se pueden contar los tipos de gráfico: línea (line), puntos (points), histograma (histogram), caja (boxplot) o barras (bar).</p>
+<p>Entremos un poco más en estos tres conceptos: datos, estéticas y geoms. Agreguemos color a nuestro gráfico, utilizando una de las variables de los datos. El argumento <code>color</code> debe colocarse dentro de <code>aes()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> disp)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
