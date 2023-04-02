@@ -140,7 +140,7 @@ ggplot(data = millas) +
 
 Notemos que se realiza la separación en tres tipos: `4` para tracción a 4 ruedas, `d` para tracción delantera y `t` para trasera.
 
-### Uso de varios geoms en el mismo gráfico
+### Uso de varios geoms en el mismo gráfico {#uso-de-varios-geoms-en-el-mismo-gráfico}
 
 Basta con «apilar» las capas en **ggplot** en una línea por separado.
 
@@ -180,11 +180,57 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
 
 `filter()` filtra los datos que le indicamos, especificando primero el conjunto de datos original y enseguida el criterio de filtrado.
 
-### Gráfico de barras
+### Gráfico de barras {#gráfico-de-barras}
 
 Veamos ahora el gráfico de barras. Para ello, usaremos el conjunto de datos diamantes. Agruparemos por la variable corte.
 
 ```{r}
 ggplot(data = diamantes) +
   stat_count(mapping = aes(x = corte))
+```
+
+Es importante recordar que el geom_bar() calcula lo que grafica, contrario al gráfico de dispersión que sí toma los valores desde el propio conjunto de datos. Este proceso es conocido como transformación estadística (stat) y cada geom tiene el suyo asociado. En el caso del diagrama de barras, utiliza stat_count(). Esto significa que es posible utilizar indistintivamente el gráfico de barras o el conteo estadístico.
+
+```{r}
+ggplot(data = diamantes) +
+  stat_count(mapping = aes(x = corte))
+```
+
+¿Para qué querríamos utilizar la transformación estadística? Hay tres razones:
+
+El gráfico de barras genera automáticamente los valores que grafica, por lo que las alturas de las barras no provienen de datos brutos. Es posible que deseemos graficar una variable con valores ya existentes. Por ejemplo, crearemos un subconjunto de datos y crearemos el gráfico a partir de este, cambiando la estadística recuento por identidad para que literalmente tome los valores y no los calcule:
+
+```{r}
+valores_brutos <- tribble(
+  ~corte, ~freq,
+  "Regular", 1610,
+  "Bueno", 4906,
+  "Muy Bueno", 12082,
+  "Premium", 13791,
+  "Ideal", 21551
+)
+
+ggplot(data = valores_brutos) +
+  geom_bar(mapping = aes(x = corte, y = freq), stat = "identity")
+```
+
+No nos preocupemos ni por tribble() ni por \<-. Solo los usamos para crear la tabla que contiene los datos necesarios para el ejemplo, más tarde ahondaremos en ellos.
+
+Puede ser que deseamos cambiar el mapeo por defecto a uno de proporciones, por ejemplo.
+
+```{r}
+ggplot(data = diamantes) +
+  geom_bar(mapping = aes(x = corte, y = stat(prop), group = 1))
+```
+
+Deseamos resaltar un resumen estadístico de los datos, más allá de solo mostrarlos en un gráfico.
+
+```{r}
+ggplot(data = diamantes) +
+  stat_summary(
+    mapping = aes(x = corte, y = profundidad),
+    fun.min = min,
+    fun.max = max,
+    fun = median
+  )
 ```
