@@ -149,3 +149,20 @@ ggplot(data = millas) +
   geom_point(mapping = aes(x = cilindrada, y = autopista, color = traccion)) +
   geom_smooth(mapping = aes(x = cilindrada, y = autopista, color = traccion))
 ```
+
+Cabe mencionar que esta simpleza ocasiona el doble trabajo de capturar mapeos a cada geom. Podemos introducir el concepto de mapeos globales y locales en **ggplot**.
+
+Veamos el uso del mapeo global:
+
+```{r}
+ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista, color = traccion)) +
+  geom_point() +
+  geom_smooth()
+```
+
+Ahora abordemos el uso de los mapeos locales. Estos permiten ampliar o sobrescribir los mapeos globales solo en la capa donde se escriben. Así es posible mostrar diferentes estéticas en cada geom.
+
+```{r}
+ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
+  geom_point(mapping = aes(color = clase))
+```
