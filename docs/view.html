@@ -334,6 +334,37 @@ specifying shapes manually if you must have them.</code></pre>
 <p><img src="view_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+</section>
+<section id="objetos-geométricos" class="level2">
+<h2 class="anchored" data-anchor-id="objetos-geométricos">Objetos geométricos</h2>
+<p>En <strong>ggplot</strong> se conoce a los tipos de gráficos como <strong>geom</strong>. Tenemos geom de barra (<em>bar</em>), de línea (<em>line</em>), de línea suavizada (<em>smooth</em>), de caja (<em>boxplot</em>), o de dispersión (<em>point</em>). Cada geom tendrá sus propias opciones de personalización. Veamos algunas de ellas.</p>
+<section id="línea-suavizada" class="level3">
+<h3 class="anchored" data-anchor-id="línea-suavizada">Línea suavizada</h3>
+<p>Utilicemos la gráfica de línea suavizada o <code>geom_smooth()</code> con exactamente los mismos datos que hemos venido utilizando con <code>geom_point()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Podemos notar que tanto el geom de dispersión como el de línea suavizada son prácticamente lo mismo en cuanto a código, diferenciándose únicamente por el nombre del geom. Sin embargo, hay parámetros estéticos que tienen sentido en uno y no en el otro. Por ejemplo, cabría esperar modificar la forma de los puntos pero no de una línea.</p>
+<p>Cambiemos la apariencia de las líneas suavizadas con base en el tipo de transmisión de los vehículos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> millas) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cilindrada, <span class="at">y =</span> autopista, <span class="at">linetype =</span> traccion))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="view_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notemos que se realiza la separación en tres tipos: <code>4</code> para tracción a 4 ruedas, <code>d</code> para tracción delantera y <code>t</code> para trasera.</p>
 
 
 </section>
