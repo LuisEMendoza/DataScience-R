@@ -178,4 +178,4 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
   geom_smooth(data = filter(millas, clase == "subcompacto"), se = FALSE)
 ```
 
-`filter()` filtra los datos que le permitimos pasar, especificando primero el conjunto de datos original y enseguida el criterio de filtrado.
+`filter()` filtra los datos que le indicamos, especificando primero el conjunto de datos original y enseguida el criterio de filtrado.
