@@ -10,8 +10,15 @@ Para tener un primer acercamiento sobre la visualización de datos con R, demos 
 library(ggplot2)
 ```
 
-y procedamos a explorar un conjunto de datos ya presente en R: `mtcars`. Este conjunto de datos es pequeño y muy ilustrativo.
+y procedamos a explorar un conjunto de datos ya presente en R: `mtcars`. Este conjunto de datos es pequeño y muy ilustrativo. Lo examinaremos con la función `str()`.
 
 ```{r}
 str(mtcars)
+```
+
+Ahora que conocemos un poco de la estructura de `mtcars`, obtengamos de él un gráfico de dispersión utilizando `ggplot()` con `cyl` como la variable *x* y `mpg` como la variable *y*.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = cyl, y = mpg)) + 
+  geom_point()
 ```
