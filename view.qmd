@@ -164,5 +164,6 @@ Ahora abordemos el uso de los mapeos locales. Estos permiten ampliar o sobrescri
 
 ```{r}
 ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
-  geom_point(mapping = aes(color = clase))
+  geom_point(mapping = aes(color = clase)) +
+  geom_smooth()
 ```
