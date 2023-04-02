@@ -1,0 +1,66 @@
+---
+title: "Introducción"
+format: html
+editor: visual
+---
+
+Veamos cuáles son los recursos que debemos descargar e instalar primero.
+
+## Prerrequisitos {#quarto}
+
+### R
+
+Comencemos instalando R. Esto se hace desde el enlace [CRAN](https://cloud.r-project.org/) y eligiendo la plataforma a usar, ya sea Windows, Mac o Linux. En estos apuntes usamos Linux.
+
+### RStudio
+
+R es poderoso, pero por defecto funciona con la consola o terminal. Esto puede echarnos para atrás la primera vez. Sin duda, uno se acostumbra y la domina, pero por comodidad podemos comenzar utilizando un buen IDE, en este caso RStudio. Podemos descargarlo e instalarlo desde [aquí](https://posit.co/download/rstudio-desktop/).
+
+### Tidyverse
+
+Por sí mismos, R y RStudio son bastante útiles. Sin embargo, es necesario ampliar sus funcionalidades mediante paquetes, que vienen siendo una especie de añadidos que contienen funciones nuevas. En nuestro caso, será el paquete *Tidyverse* el que instalaremos. Esto es posible lograrlo de dos maneras, siendo la más sencilla la de copiar y pegar la siguiente línea de código en la consola de RStudio:
+
+``` r
+install.packages("tidyverse")
+```
+
+Después de pegar dicha línea en la consola, presionamos Enter para ejecutarla. Así, R descargará e instalará el paquete (es obvio que debemos tener acceso a internet). Es normal que se tome su tiempo.
+
+Justo después de la instalación, no es posible usar los paquetes por defecto. Debemos cargarlos usando `library()`, con el nombre del paquete dentro de los paréntesis. Por ejemplo:
+
+``` r
+library(tidyverse)
+```
+
+Debe aparecer un mensaje que mencione varios nombres, como `ggplot2`, `purr` o `tibble`. Eso significa que se ha cargado correctamente.
+
+Es importante que no descuidemos la actualidad de estos paquetes. Podemos actualizarlos mediante
+
+``` r
+tidyverse_update()
+```
+
+Lo cual buscará versiones más recientes y, de haberlas, las instalará en lugar de las anteriores.
+
+### Paquete `datos`
+
+En estos apuntes se utilizan datos recuperados de varios cursos. Uno muy importante es precisamente el libro *Ciencia de Datos con R*, cuyo conjunto de datos se llama, precisamente `datos`. Desde R es posible instalarlos con
+
+``` r
+install.packages("datos")
+```
+
+## Ejecutando código
+
+Se recomienda que el código que vayamos mostrando se vaya introduciendo y ejecutando en la consola de RStudio. La ventaja de que estos apuntes sean electrónicos es que podemos mostrar el código tal cual pueda ser copiado y pegado en dicha consola. De hecho, hay hasta un botón que permite copiarlo. Identificaremos el código «copiable» porque estará escrito como a continuación:
+
+``` r
+1 + 2 
+```
+
+Localiza el botón de copiar y presiónalo. Ahora pégalo en tu consola de RStudio. Debes comprobar que te arroja lo siguiente, exactamente como te lo mostramos:
+
+```{r}
+#| echo: false
+1 + 2
+```
