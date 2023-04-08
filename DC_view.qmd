@@ -4,9 +4,9 @@ format: html
 editor: visual
 ---
 
-## Introducción
+## Introducción {#introducción}
 
-### Primer gráfico con `ggplot`
+### Primer gráfico con `ggplot` {#primer-gráfico-con-ggplot}
 
 Para tener un primer acercamiento sobre la visualización de datos con R, demos un acercamiento a **ggplot**. Carguemos el paquete con
 
@@ -36,9 +36,9 @@ ggplot(data = mtcars, mapping = aes(x = factor(cyl), y = mpg)) +
 
 Podemos notar que ahora ya solo se muestran valores existentes en el conjunto de datos.
 
-### Gramática de gráficos
+### Gramática de gráficos y sus capas {#gramática-de-gráficos}
 
-Observemos detenidamente la estructura del comando anterior. **ggplot** sigue algo conocido como la *gramática de gráficos*. Ésta consiste de tres elementos básicos: los datos o variables de interés, las escalas en las que mapearemos dichos datos (las *estéticas*) y los elementos visuales usados para nuestros datos (las *geometrías*).
+Observemos detenidamente la estructura del comando anterior. **ggplot** sigue algo conocido como la *gramática de gráficos*. Ésta consiste de tres elementos básicos: los datos o variables de interés, las escalas en las que mapearemos dichos datos (las *estéticas*) y los elementos visuales usados para nuestros datos (las *geometrías*). De manera opcional, entra una cuarta capa, los *temas*.
 
 Entre las *Estéticas* podemos encontrar los ejes *x* y *y*, el color de contorno o relleno de las formas, el tamaño, las etiquetas, transparencias, el tipo de forma, la anchura o el tipo de línea dibujada.
 
@@ -59,3 +59,50 @@ ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, size = disp)) +
 ```
 
 Sin embargo, hay que tener cuidado con el hecho de que una variable continua no debe ser mapeada con `shape`. Por ende, `shape` no existe en una escala continua.
+
+#### Capa *datos* {#capa-datos}
+
+La gramática de gráficos utiliza el concepto de capas para la construcción de gráficos. La capa más inferior es la que se corresponde con los datos.
+
+Para esta sección se trabajará con el ya clásico conjunto de datos llamado `iris`, que recoge información de tres especies de lirios: *setosa*, *versicolor* y *virginica*. Fueron tomadas cuatro mediciones de cada planta: tanto la longitud y anchura de pétalos como las de los sépalos. Los pétalos se identifican usualmente como la parte colorida de las flores, mientras que los sépalos son las hojas externas de color verde de las mismas flores, aunque cabe mencionar que en el caso de los lirios, los sépalos son coloridos también. El conjunto de datos `iris` contiene cinco variables: el nombre de especie y las cuatro mediciones mencionadas antes.
+
+#### Capa *estética* {#capa-estética}
+
+Esta capa nos indica cuál es la escala y la manera en la que mapearemos nuestros datos, es decir, definiremos el tipo de gráfico y sus ejes, por lo que de manera indirecta también quedará determinado el rango de visión de nuestros datos.
+
+Continuando con el ejemplo del conjunto `iris`, crearemos un gráfico de dispersión cuyos ejes *x* y *y* serán asociados con la longitud y la anchura de los sépalos, respectivamente.
+
+#### Capa *geometría* {#capa-geometría}
+
+Este último elemento nos permite elegir cómo se verá el gráfico. Resulta algo contradictorio que la capa *estética* se encargue de lo geométrico y la capa *geometría* de lo visual. Pero así trabaja `ggplot`.
+
+Con la información provista por las tres capas, es posible crear ya un gráfico simple, quizá algo rústico, pero funcional.
+
+#### Capa *tema* {#capa-tema}
+
+Si deseamos darle mayor claridad o facilidad de interpretación a nuestro gráfico, echaremos mano de una capa opcional: *tema*.
+
+### Agregando geometrías
+
+Trabajemos con el set de datos conocido como `diamonds`, que incluye información sobre diamantes. Exploremos su contenido
+
+```{r}
+str(diamonds)
+```
+
+Podemos notar que cuenta con varias variables, de las cuales nos interesan `carat` (una medida del tamaño de los diamantes) y `price` (se corresponde con el precio).
+
+Vamos a crear un gráfico de dispersión que relacione estas variables. Queremos dejar el precio como la variable dependiente, así que ejecutemos los siguientes comandos:
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
+  geom_point()
+```
+
+Ahora queremos agregar una línea de tendencia suavizada a nuestro gráfico. Simplemente añadimos una capa de geometría más utilizando la misma lógica, con `geom_smooth()`:
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
+  geom_point() +
+  geom_smooth()
+```

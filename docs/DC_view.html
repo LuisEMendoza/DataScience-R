@@ -239,8 +239,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Podemos notar que ahora ya solo se muestran valores existentes en el conjunto de datos.</p>
 </section>
 <section id="gramática-de-gráficos" class="level3">
-<h3 class="anchored" data-anchor-id="gramática-de-gráficos">Gramática de gráficos</h3>
-<p>Observemos detenidamente la estructura del comando anterior. <strong>ggplot</strong> sigue algo conocido como la <em>gramática de gráficos</em>. Ésta consiste de tres elementos básicos: los datos o variables de interés, las escalas en las que mapearemos dichos datos (las <em>estéticas</em>) y los elementos visuales usados para nuestros datos (las <em>geometrías</em>).</p>
+<h3 class="anchored" data-anchor-id="gramática-de-gráficos">Gramática de gráficos y sus capas</h3>
+<p>Observemos detenidamente la estructura del comando anterior. <strong>ggplot</strong> sigue algo conocido como la <em>gramática de gráficos</em>. Ésta consiste de tres elementos básicos: los datos o variables de interés, las escalas en las que mapearemos dichos datos (las <em>estéticas</em>) y los elementos visuales usados para nuestros datos (las <em>geometrías</em>). De manera opcional, entra una cuarta capa, los <em>temas</em>.</p>
 <p>Entre las <em>Estéticas</em> podemos encontrar los ejes <em>x</em> y <em>y</em>, el color de contorno o relleno de las formas, el tamaño, las etiquetas, transparencias, el tipo de forma, la anchura o el tipo de línea dibujada.</p>
 <p>Para el caso de las <em>Geometrías</em> (que en delante llamaremos <em>geom</em>) se pueden contar los tipos de gráfico: línea (line), puntos (points), histograma (histogram), caja (boxplot) o barras (bar).</p>
 <p>Entremos un poco más en estos tres conceptos: datos, estéticas y geoms. Agreguemos color a nuestro gráfico, utilizando una de las variables de los datos. El argumento <code>color</code> debe colocarse dentro de <code>aes()</code>.</p>
@@ -260,6 +260,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Sin embargo, hay que tener cuidado con el hecho de que una variable continua no debe ser mapeada con <code>shape</code>. Por ende, <code>shape</code> no existe en una escala continua.</p>
+<section id="capa-datos" class="level4">
+<h4 class="anchored" data-anchor-id="capa-datos">Capa <em>datos</em></h4>
+<p>La gramática de gráficos utiliza el concepto de capas para la construcción de gráficos. La capa más inferior es la que se corresponde con los datos.</p>
+<p>Para esta sección se trabajará con el ya clásico conjunto de datos llamado <code>iris</code>, que recoge información de tres especies de lirios: <em>setosa</em>, <em>versicolor</em> y <em>virginica</em>. Fueron tomadas cuatro mediciones de cada planta: tanto la longitud y anchura de pétalos como las de los sépalos. Los pétalos se identifican usualmente como la parte colorida de las flores, mientras que los sépalos son las hojas externas de color verde de las mismas flores, aunque cabe mencionar que en el caso de los lirios, los sépalos son coloridos también. El conjunto de datos <code>iris</code> contiene cinco variables: el nombre de especie y las cuatro mediciones mencionadas antes.</p>
+</section>
+<section id="capa-estética" class="level4">
+<h4 class="anchored" data-anchor-id="capa-estética">Capa <em>estética</em></h4>
+<p>Esta capa nos indica cuál es la escala y la manera en la que mapearemos nuestros datos, es decir, definiremos el tipo de gráfico y sus ejes, por lo que de manera indirecta también quedará determinado el rango de visión de nuestros datos.</p>
+<p>Continuando con el ejemplo del conjunto <code>iris</code>, crearemos un gráfico de dispersión cuyos ejes <em>x</em> y <em>y</em> serán asociados con la longitud y la anchura de los sépalos, respectivamente.</p>
+</section>
+<section id="capa-geometría" class="level4">
+<h4 class="anchored" data-anchor-id="capa-geometría">Capa <em>geometría</em></h4>
+<p>Este último elemento nos permite elegir cómo se verá el gráfico. Resulta algo contradictorio que la capa <em>estética</em> se encargue de lo geométrico y la capa <em>geometría</em> de lo visual. Pero así trabaja <code>ggplot</code>.</p>
+<p>Con la información provista por las tres capas, es posible crear ya un gráfico simple, quizá algo rústico, pero funcional.</p>
+</section>
+<section id="capa-tema" class="level4">
+<h4 class="anchored" data-anchor-id="capa-tema">Capa <em>tema</em></h4>
+<p>Si deseamos darle mayor claridad o facilidad de interpretación a nuestro gráfico, echaremos mano de una capa opcional: <em>tema</em>.</p>
+</section>
+</section>
+<section id="agregando-geometrías" class="level3">
+<h3 class="anchored" data-anchor-id="agregando-geometrías">Agregando geometrías</h3>
+<p>Trabajemos con el set de datos conocido como <code>diamonds</code>, que incluye información sobre diamantes. Exploremos su contenido</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [53,940 × 10] (S3: tbl_df/tbl/data.frame)
+ $ carat  : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
+ $ cut    : Ord.factor w/ 5 levels "Fair"&lt;"Good"&lt;..: 5 4 2 4 2 3 3 3 1 3 ...
+ $ color  : Ord.factor w/ 7 levels "D"&lt;"E"&lt;"F"&lt;"G"&lt;..: 2 2 2 6 7 7 6 5 2 5 ...
+ $ clarity: Ord.factor w/ 8 levels "I1"&lt;"SI2"&lt;"SI1"&lt;..: 2 3 5 4 2 6 7 3 4 5 ...
+ $ depth  : num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
+ $ table  : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
+ $ price  : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
+ $ x      : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
+ $ y      : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
+ $ z      : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
+</div>
+</div>
+<p>Podemos notar que cuenta con varias variables, de las cuales nos interesan <code>carat</code> (una medida del tamaño de los diamantes) y <code>price</code> (se corresponde con el precio).</p>
+<p>Vamos a crear un gráfico de dispersión que relacione estas variables. Queremos dejar el precio como la variable dependiente, así que ejecutemos los siguientes comandos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ahora queremos agregar una línea de tendencia suavizada a nuestro gráfico. Simplemente añadimos una capa de geometría más utilizando la misma lógica, con <code>geom_smooth()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>

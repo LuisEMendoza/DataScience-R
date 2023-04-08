@@ -144,10 +144,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link active" href="./intro.html" aria-current="page">
  <span class="menu-text">Introducción</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./view.qmd">
- <span class="menu-text">Visualización</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-visualización" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Visualización</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-visualización">    
+        <li>
+    <a class="dropdown-item" href="./DC_view.html">
+ <span class="dropdown-text">Visualización de datos - DC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./R4DS_view.html">
+ <span class="dropdown-text">Visualización de datos - R4DS</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./about.qmd">
  <span class="menu-text">About</span></a>
