@@ -106,3 +106,56 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
   geom_point() +
   geom_smooth()
 ```
+
+### Mapeos globales y locales
+
+Es posible modificar los mapeos de manera general o que afecten a geometrías específicas. Si deseamos hacerlo globalmente, la modificación la realizaremos en la línea correspondiente a `ggplot`. En caso contrario modificamos la línea correspondiente a la geometría en sí. Cambiemos el color de ambas geometrías utilizando la variable incluida en el set de datos llamada `clarity` asignada al argumento `color` de ggplot:
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price, color = clarity)) +
+  geom_point() +
+  geom_smooth()
+```
+
+La geometría `geom_point()` cuenta con un argumento llamado `alpha` que controla la opacidad de los puntos mostrados, cuyos valores van de 0 a 1. Un valor de 1 implica toyal opacidad y uno de 0 la transparencia máxima: invisibilidad. Dibujemos los puntos un 40% más transparentes para facilitar su lectura, modificando el mapeo únicamente para la geometría de dispersión.
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price, color = clarity)) +
+  geom_point(aes(alpha = 0.4)) +
+  geom_smooth()
+```
+
+### Guardando los gráficos como variables
+
+Es posible almacenar los plots como variables, utilizando la asignación común en R. Sin embargo, es usual que se asigne solo las capas *datos* y *estética*, dejando las *geometrías* para después.
+
+Creemos la variable `plot_price_vs_carat` y asignemos el gráfico a la misma
+
+```{r}
+plot_price_vs_carat <- ggplot(data = diamonds, mapping = aes(x = carat, y = price))
+```
+
+El comando anterior crea el gráfico pero no lo muestra pues falta la geometría. La agregamos y mostramos con
+
+```{r}
+plot_price_vs_carat + geom_point()
+```
+
+La utilidad de trabajar con los gráficos almacenados en variables es que nos permite crear y modificar de manera libre, ya que siempre podemos recuperar el original llamando a la variable. Vamos a crear otro gráfico con transparencias al 20%, asignando el original a otra variable y modificando ésta con `aes()`.
+
+```{r}
+trans_plot <- plot_price_vs_carat + geom_point(aes(alpha = 0.2))
+```
+
+Para visualizar nuestro gráfico basta con llamar la variable:
+
+```{r}
+trans_plot
+```
+
+También podemos hacer lo mismo con el color y otra variable.
+
+```{r}
+byclarity_plot <- plot_price_vs_carat + geom_point(aes(color = clarity))
+byclarity_plot
+```
