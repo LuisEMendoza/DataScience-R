@@ -159,3 +159,38 @@ También podemos hacer lo mismo con el color y otra variable.
 byclarity_plot <- plot_price_vs_carat + geom_point(aes(color = clarity))
 byclarity_plot
 ```
+
+## Estéticas visibles
+
+Ya hemos visto que los ejes cartesianos son *estéticas*, al igual que otras características como el color o la transparencia. Hay más. Veamos cuáles son y hagamos unas cuantas aclaraciones.
+
+Tenemos `size`, que se refiere al grosor de los puntos y líneas. Mientras que es importante saber que `color` es para definir el color de líneas y puntos o el contorno de las figuras más complejas. Si deseamos modificar el color de relleno de estas figuras, debemos utilizar `fill`. Si por lo contrario, queremos modificar el tipo de línea, utilizamos la estética `linetype`. Para modificar el texto en los ejes o gráficos usaremos la estética `label` y para finalizar, mencionemos `shape`, que permite cambiar la forma de los puntos.
+
+### `color`, `shape` and `size`
+
+Volvamos a nuestro conjunto de datos llamado `mtcars` para aplicar las estéticas a una de sus variables, la categórica `cyl`. Estas estéticas van incluidas en `aes()` y cabe decir que por convención no es necesario nombrar los argumentos `x` y `y`. Sin embargo, lo seguiremos haciendo por claridad.
+
+No olvidemos que la variable `cyl` es categórica pero la usaremos como factor. Creemos un gráfico de dispersión con `wt` como la variable independiente, `mpg` como la dependiente y `fcyl` como la estética `color`.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point()
+```
+
+Agreguemos un par de estéticas más: `shape` y `size` pero en este caso serán aplicadas a la geometría. Les daremos los valores de 1 y 4, respectivamente.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(shape = 1, size = 4)
+```
+
+### `color` contra `fill`
+
+Ya se mencionó antes que la estética `color` modifica el contorno de una geometría y `fill` cambia el relleno de la misma. El gráfico de dispersión, al trabajar con puntos, asume que estos no cuentan con relleno, a menos que se modifique la figura de los mismos. Por defecto, la forma `shape` del punto es 19 y esta solo admite cambios en el contorno. Sin embargo, si cambiamos `shape = 21` podremos cambiar el relleno también.
+
+Trabajemos con las variables `cyl` y `am` convertidas a factores y hagamos que la primera se refiera ahora a `fill` y no a `color`, además de modificar la forma a 21 y agreguemos una transparencia de 0.6.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, fill = factor(cyl))) +
+  geom_point(shape = 21, size = 4, alpha = 0.6)
+```

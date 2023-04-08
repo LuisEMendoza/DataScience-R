@@ -381,6 +381,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="DC_view_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+</section>
+<section id="estéticas-visibles" class="level2">
+<h2 class="anchored" data-anchor-id="estéticas-visibles">Estéticas visibles</h2>
+<p>Ya hemos visto que los ejes cartesianos son <em>estéticas</em>, al igual que otras características como el color o la transparencia. Hay más. Veamos cuáles son y hagamos unas cuantas aclaraciones.</p>
+<p>Tenemos <code>size</code>, que se refiere al grosor de los puntos y líneas. Mientras que es importante saber que <code>color</code> es para definir el color de líneas y puntos o el contorno de las figuras más complejas. Si deseamos modificar el color de relleno de estas figuras, debemos utilizar <code>fill</code>. Si por lo contrario, queremos modificar el tipo de línea, utilizamos la estética <code>linetype</code>. Para modificar el texto en los ejes o gráficos usaremos la estética <code>label</code> y para finalizar, mencionemos <code>shape</code>, que permite cambiar la forma de los puntos.</p>
+<section id="color-shape-and-size" class="level3">
+<h3 class="anchored" data-anchor-id="color-shape-and-size"><code>color</code>, <code>shape</code> and <code>size</code></h3>
+<p>Volvamos a nuestro conjunto de datos llamado <code>mtcars</code> para aplicar las estéticas a una de sus variables, la categórica <code>cyl</code>. Estas estéticas van incluidas en <code>aes()</code> y cabe decir que por convención no es necesario nombrar los argumentos <code>x</code> y <code>y</code>. Sin embargo, lo seguiremos haciendo por claridad.</p>
+<p>No olvidemos que la variable <code>cyl</code> es categórica pero la usaremos como factor. Creemos un gráfico de dispersión con <code>wt</code> como la variable independiente, <code>mpg</code> como la dependiente y <code>fcyl</code> como la estética <code>color</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Agreguemos un par de estéticas más: <code>shape</code> y <code>size</code> pero en este caso serán aplicadas a la geometría. Les daremos los valores de 1 y 4, respectivamente.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="color-contra-fill" class="level3">
+<h3 class="anchored" data-anchor-id="color-contra-fill"><code>color</code> contra <code>fill</code></h3>
+<p>Ya se mencionó antes que la estética <code>color</code> modifica el contorno de una geometría y <code>fill</code> cambia el relleno de la misma. El gráfico de dispersión, al trabajar con puntos, asume que estos no cuentan con relleno, a menos que se modifique la figura de los mismos. Por defecto, la forma <code>shape</code> del punto es 19 y esta solo admite cambios en el contorno. Sin embargo, si cambiamos <code>shape = 21</code> podremos cambiar el relleno también.</p>
+<p>Trabajemos con las variables <code>cyl</code> y <code>am</code> convertidas a factores y hagamos que la primera se refiera ahora a <code>fill</code> y no a <code>color</code>, además de modificar la forma a 21 y agreguemos una transparencia de 0.6.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">fill =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>
