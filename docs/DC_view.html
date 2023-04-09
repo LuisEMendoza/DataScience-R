@@ -454,9 +454,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-</section>
-<section id="atributos-color-shape-size-and-alpha" class="level2">
-<h2 class="anchored" data-anchor-id="atributos-color-shape-size-and-alpha">Atributos <code>color</code>, <code>shape</code>, <code>size</code> and <code>alpha</code></h2>
+<section id="atributos-color-shape-size-and-alpha" class="level3">
+<h3 class="anchored" data-anchor-id="atributos-color-shape-size-and-alpha">Atributos <code>color</code>, <code>shape</code>, <code>size</code> and <code>alpha</code></h3>
 <p>Esta vez utilizaremos argumentos para configurar los atributos del gráfico, no mapeando variables como estéticas.</p>
 <p>Los colores en R pueden especificarse utilizando códigos <em>hex</em>, una almohadilla seguida por dos números hexadecimales por cada color RGB (rojo, verde y azul). Este es un sistema de numeración base 16 y se mira así: <code>#RRGGBB</code>. Tenemos números desde 0 a 9 y letras como la A representando 10 hasta F representando 15. Las parejas de números hexadecimales pueden dar un rango de 0 a 255. Ejemplos típicos son el negro (<code>#000000</code>) y el blanco (<code>#FFFFFF</code>).</p>
 <p>Para estos ejercicios, usaremos el color <code>#4ABEFF</code>. Vamos a usarlo como el color de los puntos de nuestro gráfico de dispersión con una transparencia del 60%:</p>
@@ -476,6 +475,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="DC_view_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
 <section id="conflictos-con-las-estéticas" class="level3">
 <h3 class="anchored" data-anchor-id="conflictos-con-las-estéticas">Conflictos con las estéticas</h3>
 <p>Las estéticas pueden usarse como atributos. Veamos un ejemplo</p>
@@ -500,6 +500,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">24</span>, <span class="at">color =</span> <span class="st">"yellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="DC_view_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Podemos notar que las estéticas definidas no se cumplieron, quedando en su lugar el color determinado en la geometría.</p>
+</section>
+<section id="haciendo-todo-lo-posible" class="level3">
+<h3 class="anchored" data-anchor-id="haciendo-todo-lo-posible">Haciendo todo lo posible</h3>
+<p>En este ejercicio agregaremos más capas estéticas al gráfico. Seguiremos trabajando con <code>mtcars</code>, pero ahora con más propiedades de los coches. Debemos tener en cuenta que agregar más estéticas no siempre resulta ser la mejor idea, ya que se aumenta la complejidad y se disminuye la claridad de lectura.</p>
+<p>Creemos un gráfico de dispersión de <code>qsec</code> contra <code>mpg</code>, coloreado por <code>cyl</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> qsec, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Agreguemos <code>am</code> como la estética <code>shape</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> qsec, <span class="at">color =</span> <span class="fu">factor</span>(cyl), <span class="at">shape =</span> <span class="fu">factor</span>(am))) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Hagamos esto más cargado. Mapeemos el resultado de dividir <code>hp</code> entre <code>wt</code> como la estética <code>size</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> qsec, <span class="at">color =</span> <span class="fu">factor</span>(cyl), <span class="at">shape =</span> <span class="fu">factor</span>(am), <span class="at">shape =</span> hp <span class="sc">/</span> wt)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Duplicated aesthetics after name standardisation: shape</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="DC_view_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

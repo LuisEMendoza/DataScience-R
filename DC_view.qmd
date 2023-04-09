@@ -233,7 +233,7 @@ plot_mpg_vs_wt <- ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
 plot_mpg_vs_wt
 ```
 
-## Atributos `color`, `shape`, `size` and `alpha`
+### Atributos `color`, `shape`, `size` and `alpha`
 
 Esta vez utilizaremos argumentos para configurar los atributos del gráfico, no mapeando variables como estéticas.
 
@@ -275,4 +275,31 @@ Creemos otro gráfico de dispersión pero con distintos forma y color:
 ```{r}
 ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
   geom_point(shape = 24, color = "yellow")
+```
+
+Podemos notar que las estéticas definidas no se cumplieron, quedando en su lugar el color determinado en la geometría.
+
+### Haciendo todo lo posible
+
+En este ejercicio agregaremos más capas estéticas al gráfico. Seguiremos trabajando con `mtcars`, pero ahora con más propiedades de los coches. Debemos tener en cuenta que agregar más estéticas no siempre resulta ser la mejor idea, ya que se aumenta la complejidad y se disminuye la claridad de lectura.
+
+Creemos un gráfico de dispersión de `qsec` contra `mpg`, coloreado por `cyl`.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = qsec, color = factor(cyl))) +
+  geom_point()
+```
+
+Agreguemos `am` como la estética `shape`:
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = qsec, color = factor(cyl), shape = factor(am))) +
+  geom_point()
+```
+
+Hagamos esto más cargado. Mapeemos el resultado de dividir `hp` entre `wt` como la estética `size`
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = qsec, color = factor(cyl), shape = factor(am), shape = hp / wt)) +
+  geom_point()
 ```
