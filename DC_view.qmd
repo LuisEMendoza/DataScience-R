@@ -230,4 +230,49 @@ Ahora resulta que en realidad debemos usar otro tipo de gráfico. Cambiemos el d
 ```{r}
 plot_mpg_vs_wt <- ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
   geom_text(aes(label = factor(cyl)))
+plot_mpg_vs_wt
+```
+
+## Atributos `color`, `shape`, `size` and `alpha`
+
+Esta vez utilizaremos argumentos para configurar los atributos del gráfico, no mapeando variables como estéticas.
+
+Los colores en R pueden especificarse utilizando códigos *hex*, una almohadilla seguida por dos números hexadecimales por cada color RGB (rojo, verde y azul). Este es un sistema de numeración base 16 y se mira así: `#RRGGBB`. Tenemos números desde 0 a 9 y letras como la A representando 10 hasta F representando 15. Las parejas de números hexadecimales pueden dar un rango de 0 a 255. Ejemplos típicos son el negro (`#000000`) y el blanco (`#FFFFFF`).
+
+Para estos ejercicios, usaremos el color `#4ABEFF`. Vamos a usarlo como el color de los puntos de nuestro gráfico de dispersión con una transparencia del 60%:
+
+```{r}
+mi_color <- "#4ABEFF"
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
+  geom_point(color = mi_color, alpha = 0.6)
+```
+
+Modifiquemos un poco, ahora utilizaremos `fill` en lugar de `color`. Además, cambiaremos la forma y el tamaño de nuestros puntos:
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, fill = factor(cyl))) +
+  geom_point(color = mi_color, size = 10, shape = 1)
+```
+
+### Conflictos con las estéticas
+
+Las estéticas pueden usarse como atributos. Veamos un ejemplo
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(alpha = 0.5)
+```
+
+Ahora volvamos a crear un gráfico de texto con los nombres de las columnas del set de datos. Esto se consigue con `rownames()`:
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_text(label = rownames(mtcars), color = "red")
+```
+
+Creemos otro gráfico de dispersión pero con distintos forma y color:
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(shape = 24, color = "yellow")
 ```
