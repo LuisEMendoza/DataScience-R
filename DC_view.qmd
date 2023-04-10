@@ -82,7 +82,7 @@ Con la información provista por las tres capas, es posible crear ya un gráfico
 
 Si deseamos darle mayor claridad o facilidad de interpretación a nuestro gráfico, echaremos mano de una capa opcional: *tema*.
 
-### Agregando geometrías
+### Agregando geometrías {#agregando-geometrías}
 
 Trabajemos con el set de datos conocido como `diamonds`, que incluye información sobre diamantes. Exploremos su contenido
 
@@ -107,7 +107,7 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
   geom_smooth()
 ```
 
-### Mapeos globales y locales
+### Mapeos globales y locales {#mapeos-globales-y-locales}
 
 Es posible modificar los mapeos de manera general o que afecten a geometrías específicas. Si deseamos hacerlo globalmente, la modificación la realizaremos en la línea correspondiente a `ggplot`. En caso contrario modificamos la línea correspondiente a la geometría en sí. Cambiemos el color de ambas geometrías utilizando la variable incluida en el set de datos llamada `clarity` asignada al argumento `color` de ggplot:
 
@@ -125,7 +125,7 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price, color = clarity)) +
   geom_smooth()
 ```
 
-### Guardando los gráficos como variables
+### Guardando los gráficos como variables {#guardando-los-gráficos-como-variables}
 
 Es posible almacenar los plots como variables, utilizando la asignación común en R. Sin embargo, es usual que se asigne solo las capas *datos* y *estética*, dejando las *geometrías* para después.
 
@@ -160,13 +160,13 @@ byclarity_plot <- plot_price_vs_carat + geom_point(aes(color = clarity))
 byclarity_plot
 ```
 
-## Estéticas visibles
+## Estéticas visibles {#estéticas-visibles}
 
 Ya hemos visto que los ejes cartesianos son *estéticas*, al igual que otras características como el color o la transparencia. Hay más. Veamos cuáles son y hagamos unas cuantas aclaraciones.
 
 Tenemos `size`, que se refiere al grosor de los puntos y líneas. Mientras que es importante saber que `color` es para definir el color de líneas y puntos o el contorno de las figuras más complejas. Si deseamos modificar el color de relleno de estas figuras, debemos utilizar `fill`. Si por lo contrario, queremos modificar el tipo de línea, utilizamos la estética `linetype`. Para modificar el texto en los ejes o gráficos usaremos la estética `label` y para finalizar, mencionemos `shape`, que permite cambiar la forma de los puntos.
 
-### `color`, `shape` and `size`
+### `color`, `shape` and `size` {#color-shape-and-size}
 
 Volvamos a nuestro conjunto de datos llamado `mtcars` para aplicar las estéticas a una de sus variables, la categórica `cyl`. Estas estéticas van incluidas en `aes()` y cabe decir que por convención no es necesario nombrar los argumentos `x` y `y`. Sin embargo, lo seguiremos haciendo por claridad.
 
@@ -184,7 +184,7 @@ ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
   geom_point(shape = 1, size = 4)
 ```
 
-### `color` contra `fill`
+### `color` contra `fill` {#color-contra-fill}
 
 Ya se mencionó antes que la estética `color` modifica el contorno de una geometría y `fill` cambia el relleno de la misma. El gráfico de dispersión, al trabajar con puntos, asume que estos no cuentan con relleno, a menos que se modifique la figura de los mismos. Por defecto, la forma `shape` del punto es 19 y esta solo admite cambios en el contorno. Sin embargo, si cambiamos `shape = 21` podremos cambiar el relleno también.
 
@@ -202,7 +202,7 @@ ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, fill = factor(cyl), color =
   geom_point(shape = 21, size = 4, alpha = 0.6)
 ```
 
-### Comparando *estéticas*
+### Comparando *estéticas* {#comparando-estéticas}
 
 No olvidemos que modificar los atributos pueden acarrear problemas. Por ejemplo, pueden sobrescribir las estéticas del gráfico. Para ejemplificar esto, construyamos un plot más.
 
@@ -233,7 +233,7 @@ plot_mpg_vs_wt <- ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
 plot_mpg_vs_wt
 ```
 
-### Atributos `color`, `shape`, `size` and `alpha`
+### Atributos `color`, `shape`, `size` and `alpha` {#atributos-color-shape-size-and-alpha}
 
 Esta vez utilizaremos argumentos para configurar los atributos del gráfico, no mapeando variables como estéticas.
 
@@ -254,7 +254,7 @@ ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, fill = factor(cyl))) +
   geom_point(color = mi_color, size = 10, shape = 1)
 ```
 
-### Conflictos con las estéticas
+### Conflictos con las estéticas {#conflictos-con-las-estéticas}
 
 Las estéticas pueden usarse como atributos. Veamos un ejemplo
 
@@ -279,7 +279,7 @@ ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(cyl))) +
 
 Podemos notar que las estéticas definidas no se cumplieron, quedando en su lugar el color determinado en la geometría.
 
-### Haciendo todo lo posible
+### Haciendo todo lo posible {#haciendo-todo-lo-posible}
 
 En este ejercicio agregaremos más capas estéticas al gráfico. Seguiremos trabajando con `mtcars`, pero ahora con más propiedades de los coches. Debemos tener en cuenta que agregar más estéticas no siempre resulta ser la mejor idea, ya que se aumenta la complejidad y se disminuye la claridad de lectura.
 
@@ -302,4 +302,57 @@ Hagamos esto más cargado. Mapeemos el resultado de dividir `hp` entre `wt` como
 ```{r}
 ggplot(data = mtcars, mapping = aes(x = mpg, y = qsec, color = factor(cyl), shape = factor(am), shape = hp / wt)) +
   geom_point()
+```
+
+### Actualizando etiquetas estéticas {#actualizando-etiquetas-estéticas}
+
+En este ejercicio modificaremos algunas estéticas para elaborar un gráfico de barras del número de cilindros para coches con diferentes tipos de transmisión. Usaremos algunas funciones para mejorar la apariencia del gráfico:
+
+-   `labs()` para configurar las etiquetas de los ejes *x* y *y*. Necesita cadenas como argumentos.
+
+-   `scale_fill_manual()` define propiedades de la escala de color. El primer argumento define el título de las leyendas. `values` es un vector de colores llamado para usar.
+
+Crearemos un gráfico de barras cuyo eje *x* llamaremos "Número de cilindros" y eje *y* "Conteo", usando los argumentos `x` y `y` de `labs()`, respectivamente.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = factor(cyl), fill = factor(am))) +
+  geom_bar() +
+  labs(x = "Number of cylinders", y = "Count")
+```
+
+Notemos que ahora ya tenemos tres capas, siendo la última la configuración de los títulos de ejes.
+
+Supongamos que queremos modificar los colores de relleno de nuestro gráfico. Lo haremos agregando una nueva capa con `scale_fill_manual()` y escribiendo como argumentos el título "Transmission" y el vector donde almacenamos los nuevos colores:
+
+```{r}
+paleta <- c(automatic = "#377EB8", manual = "#E41A1C")
+
+ggplot(data = mtcars, mapping = aes(x = factor(cyl), fill = factor(am))) +
+  geom_bar() +
+  labs(x = "Number of cylinders", y = "Count") +
+  scale_fill_manual("Transmission", values = paleta)
+```
+
+Podemos darnos cuenta que no se aplicó ningún color. Esto se debe a un aspecto interno de la conversión a `factor()` de la variable `am`. Cuando convirtamos a factor una variable y necesitemos incluir etiquetas diferentes a las que tiene por defecto, debemos agregar las nuevas etiquetas en la propia conversión a factor y no en la nueva variable, por ejemplo:
+
+```{r}
+paleta <- c("#377EB8", "#E41A1C")
+
+ggplot(data = mtcars, mapping = aes(x = factor(cyl), 
+      fill = factor(am, labels = c("Automatic", "Manual")))) +
+  geom_bar() +
+  labs(x = "Number of cylinders", y = "Count") +
+  scale_fill_manual("Transmission", values = paleta)
+```
+
+Pues necesitamos que las barras correspondientes a cada tipo de transmisión se muestren una al lado de la otra. Modificamos el argumento `position` igualado a `"dodge"`, cuidando de colocar las comillas simples.
+
+```{r}
+paleta <- c("#377EB8", "#E41A1C")
+
+ggplot(data = mtcars, mapping = aes(x = factor(cyl), 
+      fill = factor(am, labels = c("Automatic", "Manual")))) +
+  geom_bar(position = "dodge") +
+  labs(x = "Number of cylinders", y = "Count") +
+  scale_fill_manual("Transmission", values = paleta)
 ```
