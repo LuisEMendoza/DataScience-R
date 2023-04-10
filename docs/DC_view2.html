@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>En este apartado se abordan algunos tipos de gráficos a mayor profundidad, como los de dispersión, los de barras, los histogramas o de línea. Se tocarán aspectos como la solución a la sobrecarga de datos visibles y demás detalles.</p>
 <section id="diagramas-de-dispersión" class="level3">
 <h3 class="anchored" data-anchor-id="diagramas-de-dispersión">Diagramas de dispersión</h3>
-<p>Son intuitivos, fáciles de entender y muy comunes. Sin embargo, debemos cuidar bastante detalles como la sobregraficación, que se da cuando</p>
+<p>Son intuitivos, fáciles de entender y muy comunes. Sin embargo, debemos cuidar bastante detalles como la saturación, que se da cuando</p>
 <ol type="1">
 <li>Tenemos grandes conjuntos de datos</li>
 <li>Valores alineados en un solo eje</li>
@@ -212,6 +212,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Típicamente es recomendable utilizar la mezcla de varios valores <code>alpha</code> cuando se usen formas opacas. Alternativamente podemos usar formas huecas.</p>
 <p>También es posible utilizar puntos pequeños cuando sabemos que tendremos una alta concentración de datos en ciertas regiones.</p>
+<section id="saturación-1-grandes-sets-de-datos" class="level4">
+<h4 class="anchored" data-anchor-id="saturación-1-grandes-sets-de-datos">Saturación 1: grandes sets de datos</h4>
 <p>Veamos el conjunto de datos <code>diamonds</code> para ilustrar el cómo lidiar con grandes set de datos.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -235,8 +237,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="DC_view2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="saturación-2-valores-alineados" class="level4">
+<h4 class="anchored" data-anchor-id="saturación-2-valores-alineados">Saturación 2: valores alineados</h4>
+<p>Veamos el caso en el que los valores se alinean en un solo eje. Esto ocurre cuando un eje es continuo y el otro es categórico, lo cual puede mejorarse si se agrega ruido aleatorio.</p>
+<p>Veamos un ejemplo de este problema echando mano del set de datos <code>mtcars</code>, donde tenemos las variables <code>am</code> y <code>cyl</code>, las cuales convertimos en factores para volverlas categóricas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plot_mpg_vs_fcyl_by_fam <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mtcars, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> <span class="fu">factor</span>(cyl), <span class="at">color =</span> <span class="fu">factor</span>(am))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plot_mpg_vs_fcyl_by_fam <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notemos la manera en la que se trazan de cierta forma hasta tres líneas verticales en nuestro gráfico. Podemos arreglarlo si agregamos ruido, pero a diferencia de algún ejemplo anterior, ahora lo cuantificaremos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plot_mpg_vs_fcyl_by_fam <span class="sc">+</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>De manera alterna, es posible usar <code>position_jitterdodge()</code> para conseguir una mayor separación. Necesita dos argumentos: <code>jitter.width</code> y <code>dodgewidth</code>. Definamos ambos como 0.3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_mpg_vs_fcyl_by_fam <span class="sc">+</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitterdodge</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">jitter.width =</span> <span class="fl">0.3</span>, <span class="at">dodge.width =</span> <span class="fl">0.3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="DC_view2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 

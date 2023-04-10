@@ -10,7 +10,7 @@ En este apartado se abordan algunos tipos de gráficos a mayor profundidad, como
 
 ### Diagramas de dispersión
 
-Son intuitivos, fáciles de entender y muy comunes. Sin embargo, debemos cuidar bastante detalles como la sobregraficación, que se da cuando
+Son intuitivos, fáciles de entender y muy comunes. Sin embargo, debemos cuidar bastante detalles como la saturación, que se da cuando
 
 1.  Tenemos grandes conjuntos de datos
 2.  Valores alineados en un solo eje
@@ -20,6 +20,8 @@ Son intuitivos, fáciles de entender y muy comunes. Sin embargo, debemos cuidar 
 Típicamente es recomendable utilizar la mezcla de varios valores `alpha` cuando se usen formas opacas. Alternativamente podemos usar formas huecas.
 
 También es posible utilizar puntos pequeños cuando sabemos que tendremos una alta concentración de datos en ciertas regiones.
+
+#### Saturación 1: grandes sets de datos
 
 Veamos el conjunto de datos `diamonds` para ilustrar el cómo lidiar con grandes set de datos.
 
@@ -40,4 +42,33 @@ plot_price_vs_carat_clarity <- ggplot(
 ) 
 
 plot_price_vs_carat_clarity + geom_point(alpha = 0.5, shape = 16)
+```
+
+#### Saturación 2: valores alineados
+
+Veamos el caso en el que los valores se alinean en un solo eje. Esto ocurre cuando un eje es continuo y el otro es categórico, lo cual puede mejorarse si se agrega ruido aleatorio.
+
+Veamos un ejemplo de este problema echando mano del set de datos `mtcars`, donde tenemos las variables `am` y `cyl`, las cuales convertimos en factores para volverlas categóricas.
+
+```{r}
+plot_mpg_vs_fcyl_by_fam <- ggplot(
+  data = mtcars, mapping = aes(x = mpg, y = factor(cyl), color = factor(am))
+)
+
+plot_mpg_vs_fcyl_by_fam + geom_point()
+```
+
+Notemos la manera en la que se trazan de cierta forma hasta tres líneas verticales en nuestro gráfico. Podemos arreglarlo si agregamos ruido, pero a diferencia de algún ejemplo anterior, ahora lo cuantificaremos.
+
+```{r}
+plot_mpg_vs_fcyl_by_fam + 
+  geom_point(position = position_jitter(0.3))
+```
+
+De manera alterna, es posible usar `position_jitterdodge()` para conseguir una mayor separación. Necesita dos argumentos: `jitter.width` y `dodgewidth`. Definamos ambos como 0.3.
+
+```{r}
+plot_mpg_vs_fcyl_by_fam + 
+  geom_point(position = position_jitterdodge(
+    jitter.width = 0.3, dodge.width = 0.3))
 ```
