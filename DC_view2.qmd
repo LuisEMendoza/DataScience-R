@@ -52,7 +52,7 @@ Veamos un ejemplo de este problema echando mano del set de datos `mtcars`, donde
 
 ```{r}
 plot_mpg_vs_fcyl_by_fam <- ggplot(
-  data = mtcars, mapping = aes(x = mpg, y = factor(cyl), color = factor(am))
+  data = mtcars, mapping = aes(x = factor(cyl), y = mpg, color = factor(am))
 )
 
 plot_mpg_vs_fcyl_by_fam + geom_point()
