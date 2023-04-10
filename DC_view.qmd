@@ -356,3 +356,22 @@ ggplot(data = mtcars, mapping = aes(x = factor(cyl),
   labs(x = "Number of cylinders", y = "Count") +
   scale_fill_manual("Transmission", values = paleta)
 ```
+
+### Configurando una estética vacía
+
+Es posible crear gráficos univariables en `ggplot()`, sin embargo, siempre se crea un eje *y* aunque no lo pidamos. Si en algún momento necesitamos realmente omitir este eje, lo podemos mapear con un valor de 0.
+
+Como ejemplo, crearemos un gráfico de dispersión con el eje *y* nulo. También agregaremos algo de *ruido* a nuestro gráfico, agregando `jitter` como atributo de la posición.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = 0)) +
+  geom_point(position = "jitter")
+```
+
+Otra manera de crear gráficos univariables es utilizando la geometría `geom_jitter()`. Podemos agregarle límites al gráfico utilizando la expresión `ylim()`, cuyo argumento pueden ser un vector con los dos límites inferior y superior, respectivamente o incluso ambos límites como si fueran dos argumentos.
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = mpg, y = 0)) +
+  geom_jitter() +
+  ylim(-2, 2)
+```
