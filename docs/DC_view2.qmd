@@ -1,0 +1,7 @@
+---
+title: "Visualización de datos 2- DC"
+format: html
+editor: visual
+---
+
+## Geometrías

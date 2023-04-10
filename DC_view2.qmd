@@ -5,3 +5,39 @@ editor: visual
 ---
 
 ## Geometrías
+
+En este apartado se abordan algunos tipos de gráficos a mayor profundidad, como los de dispersión, los de barras, los histogramas o de línea. Se tocarán aspectos como la solución a la sobrecarga de datos visibles y demás detalles.
+
+### Diagramas de dispersión
+
+Son intuitivos, fáciles de entender y muy comunes. Sin embargo, debemos cuidar bastante detalles como la sobregraficación, que se da cuando
+
+1.  Tenemos grandes conjuntos de datos
+2.  Valores alineados en un solo eje
+3.  Datos de baja precisión
+4.  Datos enteros
+
+Típicamente es recomendable utilizar la mezcla de varios valores `alpha` cuando se usen formas opacas. Alternativamente podemos usar formas huecas.
+
+También es posible utilizar puntos pequeños cuando sabemos que tendremos una alta concentración de datos en ciertas regiones.
+
+Veamos el conjunto de datos `diamonds` para ilustrar el cómo lidiar con grandes set de datos.
+
+```{r}
+library(ggplot2)
+plot_price_vs_carat_clarity <- ggplot(
+  data = diamonds, mapping = aes(x = carat, y = price, color = clarity)
+) 
+
+plot_price_vs_carat_clarity + geom_point(alpha = 0.5, shape = ".")
+```
+
+Usamos una transparencia del 50% y una forma de punto de un solo píxel. Podemos mejorarlo cambiando la forma a la número 16:
+
+```{r}
+plot_price_vs_carat_clarity <- ggplot(
+  data = diamonds, mapping = aes(x = carat, y = price, color = clarity)
+) 
+
+plot_price_vs_carat_clarity + geom_point(alpha = 0.5, shape = 16)
+```
