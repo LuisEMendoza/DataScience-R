@@ -14,6 +14,7 @@ website:
       - text: "Visualización"
         menu: 
           - DC_view.qmd
+          - DC_view2.qmd
           - R4DS_view.qmd
       - text: "About"
         file: about.qmd

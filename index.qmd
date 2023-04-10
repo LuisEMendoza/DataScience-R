@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "Inicio"
 format: html
 editor: visual
 ---
